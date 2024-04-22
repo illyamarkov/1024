@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://ipfs.io/ipfs/Qma6LAe31wPCNYvCGhtVmNN7okjobM3tmtyESi8Shctxvj">
+    <title>1024</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #ffffff;
+        }
+
+        #imageContainer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            width: auto;
+            max-width: 60vh;
+            margin: 0 auto; /* Center horizontally */
+            border: 1px solid white;
+        }
+
+        .imageItem {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .imageItem img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-width: 100%; /* Limit image width to prevent overflow */
+            max-height: 100%; /* Limit image height to prevent overflow */
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlayPopup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: black;
+            border: 2px solid white;
+            padding: 20px;
+            max-width: 80%;
+            min-width: 60%;
+            max-height: 50%;
+            text-align: center;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            overflow: auto; 
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        #pageNumber {
+            text-align: center;
+            margin-top: 10px;
+            color: #ffffff;
+        }
+
+        #navigationButtons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .navigationButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 1px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .infoButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 1px;
+            cursor: pointer;
+            margin: 0 10px;
+            border: 1px solid white;
+        }
+
+        #aboutButtonContainer {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #prevPageButton {
+            color: #000000;
+        }
+
+        #aboutOverlay {
+            color: white;
+            text-align: center;
+            align-items: center;
+        }
+
+        #artistOverlay {
+            color: white;
+            text-align: center;
+        }
+
+        .closeButton {
+            position:absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 9999; /* Ensure it's on top of other content */
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        #artistImage {
+            bottom: 0;
+            width: auto; /* Adjust width as needed */
+            height: 30vh;
+            background-image: url('https://ipfs.io/ipfs/Qma6LAe31wPCNYvCGhtVmNN7okjobM3tmtyESi8Shctxvj'); /* Replace with the URL of the image */
+            background-repeat: repeat;
+            background-size: 15vh;
+            border: 1px solid white;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        #CID{
+            border: 1px solid white;
+            padding: 10px; /* Adjust padding as needed */
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>1024</h1>
+
+    <div id="aboutButtonContainer">
+        <button class="infoButton" id="aboutButton">About</button>
+        <button class="infoButton" id="artistButton">Artist</button>
+    </div>
+    
+    <div id="imageContainer"></div>
+    <div id="navigationButtons">
+        <button class="navigationButton" id="prevPageButton">←</button>
+        <div id="pageNumber">Page: 1</div>
+        <button class="navigationButton" id="nextPageButton">→</button>
+    </div>
+
+    <!-- About Section -->
+    <div class="overlayPopup" id="aboutOverlay">
+        <div id="aboutContent">
+            <span class="closeButton" id="closeAbout">[ x ]</span>
+            <h2>About</h2>
+            <p>
+                1024 is an art exhibit. <br><br>
+
+                Every piece has been carefully composed to reflect the transendental indeterminability of 2^1024 and the boundless desolation of the 1024-bit hash. <br><br>
+
+                In essense, 1024 aims to visualize something beyond human comprehendsion, even with visual aid. <br><br>
+
+                Each photo is 1024x1024 and there are 1024 photos. Check back on 10/24, especially at 10:24. <br><br>
+
+                The images are stored on the <a href="https://www.ipfs.io/" style="color: #ffffff;" target="_blank">IPFS</a>.
+            </p>
+            <p id="CID">
+                CID: QmPo8fqN7JiPGVUbSwbkxEdAi57USYpzXbfJSqcMpJvZrx
+            </p>
+
+        </div>
+    </div>
+
+    <!-- About the Artist Section -->
+    <div class="overlayPopup" id="artistOverlay">
+        <div id="artistContent">
+            <span class="closeButton" id="closeArtist">[ x ]</span>
+            <h2>Artist</h2>
+            <p>The artist is Illya Markov, and this is a certified IllyaDrop.</p>
+        </div>
+        <div id="artistImage"></div>
+    </div>
+    
+    <div class="overlay" id="overlay">
+        <img id="expandedImg" src="" alt="Expanded Image">
+    </div>
+
+    <!-- Include JSZip via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    
+    <script>
+        const hashDictionary = {'1': 'QmV75QLdsx7KQeTTv7UjEw65VZ6whYsTE1NZZH9wNdSkSj', '10': 'QmRqMQ8QopDg8cjSsuJB26brPQbHhcvDtYqpjNwgpiKBuw', '11': 'Qmabcxu6D7e7u6GayrWS7ExX1HdzZQaTzKHoMd9WagGRhK', '12': 'QmRC9SFfUkzjscdyjp7uA8tssWSBtVUdqS1mtEePNi1JrB', '13': 'QmV29wDti32edhosAXVqgkZWZuAaaWwKc1hEr2wvKSt19G', '14': 'QmR1rvxs4scPa7oKZW4z139MWcVBaJakyeEBrVkMi4RcP9', '15': 'QmeNquhjYyEWUsyBSLePFHnfeM3cQrjWKP5MgHCxvcDsDF', '16': 'QmcDCX9r88AGXoUseVMG8G1633g7Bj5GFKiMv2gPA6GgF6', '17': 'QmXv9iVKUtnHXspZM18oqtXy95UWm3jrQqFBFpXpwKh2tM', '18': 'QmRVHUMM34K97r3VTVXRp1yLc8NYGgCiVDXhA1AGZbPdNh', '19': 'QmX2SqUaMwb7iQTPuKB2ZbVQhDKkb35HicLpJ4vQaVptZe', '2': 'QmcmRzv1W2AVu9gTa9vc6jrUmDEXrQgEcJkLtdqFMqzDGK', '20': 'QmQjWWfNWHY1sinYrhx1CJaTD61EeTjkondJP75PyiCa6v', '21': 'QmUSsCVbjtKgUfrZBzyKg8M4cCzHgEohQhFG4EZd4evUGu', '22': 'QmdsE736dwpihXPQqMN9z1qryXkXc1ryEN6EdsUwdG8X1T', '23': 'QmPQL6YrrUQ8o9C2d2Qz2xkdwUCYUtsAGGGK7FpMZTdSjg', '24': 'QmaxouwsQiVAq95Z6eBZm1QGHTfL2TgcWRGGeyS6qipxiL', '25': 'QmUj2AMQACgqpS5CgukTfK7zco2bz2MMvnTiN9xL46DoZq', '26': 'QmXsQ4FuRxEk4nxk4CHq1XnyCnX1W9oixQFrMZwdYd64ZF', '27': 'QmS1tNuTojTjvVzHy3uLumUAGBSa5Y2YhvjQFqN9NNe2n8', '28': 'QmNbUbRrhWpSgwvsZz2Uu66hYwT2UgkxWxBbpcvwTBLR7s', '29': 'QmSEa9XaEFNMMteYQMXa964a9UB1UW8x4FGCmGVuXNURX1', '3': 'QmTkX1a7vFRdZXSd2Sh7TKYVk7478XEmrpmRaXiu8V2nFm', '30': 'QmXN4iAucZWip7fF1ng8xH7NFb7G7ZqRmSrrj2DPkrutS2', '31': 'QmUWAe2thfjti5obPmbx9WpojG6TsHzqYqFiEKPjNYJ8Cn', '32': 'Qmc1J6mY1KdpZFiWzvLJYSy3yfJKeyrFMjbAm31AWWH9qQ', '33': 'QmePzBCJT4uSiwoqqmbqzjbGpJMAmPcYqDQix3a7vDQmRL', '34': 'QmWNkhR3YDXNaW7GQat6wa92ttqxtYJMFuvsKz5QJc35KK', '35': 'QmPbcbMzFgj3HiJkky2LDBf33JBtsd12yZjJWBYRgqXhN2', '36': 'QmXTdzbKUFBXvjb6B7hkpG2ZNU64eDsCWh99cHhuYc8riS', '37': 'QmVJ6bx6Ez9GqvDTNQt2ZXhtd7qbPQW44ZB38AknpYa556', '38': 'QmNe6S7M21ciBVZqGjppdc41d1MP1k5vjaUjuS95E82zR3', '39': 'QmZsPLGzXqQPvms2K11impNMXjQpCFPcLzrnHBGAvQ6zoc', '4': 'QmWaPyYrJjASkt7A7addTekto8p49BE6aBggjGD4HHVkbz', '40': 'QmXuGFbYLFbtkwx18RCa3qH1LpnRvVtzwZLgKhQxDtKEd2', '41': 'QmPayCAAjEiJ2qnt8JBMQo2kD9LpoMmNv3PeShkfqCSrGR', '42': 'QmWxmuWEwNCYyCNtNPotSo8z6dNGuuTBUk6PjSgu4DZeaz', '43': 'QmSBuX6XN6tsrPJBUF3E4dsonHhCYbL4oCi9KFwb7xNtyC', '44': 'QmU7a5bk5qoH6EKU7LxrZH3FDfvGtVpH5tEbvXTmHd4Vaw', '45': 'QmemmkzyTAN13XUpbLfJgt3H9GEpWKgyovf2ZpLvcguKhV', '46': 'QmeTPHLR2vYSr1XR2EHVbr54ZSYt9oBFW6E7NabJiVDKgk', '47': 'QmRdKpTMVEt8wuZH1TxhfcC6BNbubw8sR3dkwXHChdyM6n', '48': 'Qmb4LBgdTZrzsxXunKNL3bfU1KxvajTSp8qGy3ZDAtrK7F', '49': 'QmRbtjSmv7xRoMp2ciLQNXTWnNXTbRecydXzfA3Zg6Tfa5', '5': 'QmZrxCKAsK8GPbWnLrAVTnL4NsQbCBcLh4NvnhkjyAoc92', '50': 'QmZXQsHPQY8MaVGiiXYUKrpkUXXLnN5UZKeynQrMphPBf9', '51': 'QmQRQWogLWCeEobePjWBXotQpQPhKuinD9g7ZARgJumgyQ', '52': 'Qmb2BPKro9HpzUaEDfCGFWj2EQcrSx3yUcmmKsRAWnsbhF', '53': 'QmVyBu3XqMZccjsjPJ9q5R2AfurzsHoyAA8NRDoQVZMFVC', '54': 'QmQjwFaEELWrYorwBrWjxrWYZFDDvTnHEgYt7dSEGZvQuy', '55': 'Qmd4anbVpt9zineE89RtFm9eqkhxd1PNHGL4hqXQwq1BYa', '56': 'QmTbJSRnSdqWu87DBHybAU4LqKD9vFc1QyNBrmvewt27b4', '57': 'QmVdRUHd6E8tpTTA5JevPBbfZAbJ1r9UuA8nq4HrXN3vcb', '58': 'QmR6ajtcP7Xfcdm94qHMvErvgFQWYjBYXXcUuk4DGCC9uF', '59': 'QmQvHT7ddtrLQJp9Z5n1jxyEYgtesrehN5HhMtATQb1mvw', '6': 'QmUMuENwQo2qMT3BDDSLqH83TBYD6swN9QCGNyjnvgLBk1', '60': 'QmdrgiAtfTWWt2qiZ8cho7Ttm21pb4G7fnm2PyNRRGLUqx', '61': 'QmVD5kLtX5Le33G9JfoG9pA25w9QK3s3cfySAWsWor65UU', '62': 'QmRetPx2cbmgUXcfTLwUt6pQL1KC17bFGQJ62hRUUNdNuH', '63': 'Qmbipebhsortin8feqz7Z4J5ZuqrePp5Z2PTxwD2vhLoFa', '64': 'QmbK3MectHxictjFagkDZJkc5yNLHkSJ56pqWwxPXFftug', '7': 'Qmc4ASeSPtBGKMRvc97Nmv3mtU7ZFx7NrwiuyzFyZzR9Ny', '8': 'QmVQ5zAqVB9dC58C2H7iKwMPdNFvZj7rtzm3w3Ya3ZGuym', '9': 'QmPqDeCnVSZjSHQpga2VFNVBeZfkhZi9RmKTYmmGF2HHoC'};
+
+        aboutButton = document.getElementById('aboutButton');
+        artistButton = document.getElementById('artistButton');
+        aboutOverlay = document.getElementById('aboutOverlay');
+        artistOverlay = document.getElementById('artistOverlay');
+
+        let aboutPopup = false;
+        let artistPopup = false;
+
+        aboutButton.addEventListener('click', function (event) {
+            artistOverlay.style.display = 'none'
+            artistPopup = false
+            if (aboutPopup == false){
+                aboutOverlay.style.display = 'block'
+                aboutPopup = true;
+            }
+            else{
+                aboutOverlay.style.display = 'none'
+                aboutPopup = false;
+            }
+        });
+
+        artistButton.addEventListener('click', function (event) {
+            aboutOverlay.style.display = 'none'
+            aboutPopup = false
+            if (artistPopup == false){
+                artistOverlay.style.display = 'block'
+                artistPopup = true;
+            }
+            else{
+                artistOverlay.style.display = 'none'
+                artistPopup = false;
+            }
+        });
+
+        document.getElementById('closeArtist').addEventListener('click', function (event) {
+            artistOverlay.style.display = 'none'
+            artistPopup = false
+        });
+
+        document.getElementById('closeAbout').addEventListener('click', function (event) {
+            aboutOverlay.style.display = 'none'
+            aboutPopup = false
+        });
+
+        let currentPage = 1;
+        const maxPage = 64;
+        const minPage = 1;
+
+        const pageNumber = document.getElementById('pageNumber');
+
+        async function loadPage(page) {
+            const hash = hashDictionary[page];
+            if (!hash) {
+                console.error('Hash not found for the given page');
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://ipfs.io/ipfs/${hash}`);
+                const zipData = await response.blob();
+
+                const zip = new JSZip();
+                await zip.loadAsync(zipData);
+
+                const imageContainer = document.getElementById('imageContainer');
+                const imageItems = imageContainer.querySelectorAll('.imageItem');
+
+                let index = 0;
+                zip.forEach(async (relativePath, zipEntry) => {
+                    if (zipEntry.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+                        if (imageItems[index]) {
+                            const imgData = await zip.file(zipEntry.name).async('base64');
+                            const img = imageItems[index].querySelector('img');
+                            img.src = `data:image/jpeg;base64,${imgData}`;
+                            img.alt = zipEntry.name;
+                        } else {
+                            const imgData = await zip.file(zipEntry.name).async('base64');
+                            const img = document.createElement('img');
+                            img.src = `data:image/jpeg;base64,${imgData}`;
+                            img.alt = zipEntry.name;
+                            img.classList.add('expandable');
+
+                            const imageItem = document.createElement('div');
+                            imageItem.classList.add('imageItem');
+                            imageItem.appendChild(img);
+                            imageContainer.appendChild(imageItem);
+                        }
+                        index++;
+                    }
+                });
+
+                const overlay = document.getElementById('overlay');
+                const expandedImg = document.getElementById('expandedImg');
+
+                imageContainer.addEventListener('click', function (event) {
+                    if (event.target.classList.contains('expandable')) {
+                        expandedImg.src = event.target.src;
+                        overlay.classList.add('active');
+                    }
+                });
+
+                overlay.addEventListener('click', function (event) {
+                    if (event.target === overlay) {
+                        overlay.classList.remove('active');
+                    }
+                });
+
+                pageNumber.textContent = `Page: ${currentPage}`;
+            } catch (error) {
+                console.error(error);
+                alert('Failed to fetch and display images');
+            }
+        }
+
+
+        async function goToNextPage() {
+            if (currentPage < maxPage) {
+                currentPage++;
+                if (currentPage == maxPage){
+                    document.getElementById('nextPageButton').style.color = '#000000'
+                }
+                document.getElementById('prevPageButton').style.color = '#FFFFFF'
+                await loadPage(currentPage);
+            }
+        }
+
+        async function goToPrevPage() {
+            if (currentPage > minPage) {
+                currentPage--;
+                if (currentPage == minPage){
+                    document.getElementById('prevPageButton').style.color = '#000000'
+                }
+                document.getElementById('nextPageButton').style.color = '#FFFFFF'
+                await loadPage(currentPage);
+            }
+        }
+
+        document.getElementById('nextPageButton').addEventListener('click', goToNextPage);
+        document.getElementById('prevPageButton').addEventListener('click', goToPrevPage);
+
+        // Load the initial page when the page loads
+        loadPage(currentPage);
+    </script>
+</body>
+</html>
